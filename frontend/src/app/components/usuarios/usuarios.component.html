@@ -1,0 +1,109 @@
+<div class="row mt-5">
+
+    <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 my-5">
+
+        <div *ngIf="registro" class="alert alert-success alert-dismissible fade show" role="alert">
+            Usuario registrado con exito!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div *ngIf="existe" class="alert alert-success alert-dismissible fade show" role="alert">
+            Usuario ya esta registrado!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">
+                    Registro
+                </h2>
+
+                <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" #nombre="ngModel" [(ngModel)]="usuario.nombre" name="nombre" class="form-control" required>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="apellidos ">Apellidos</label>
+                        <input type="text" #apellidos="ngModel" [(ngModel)]="usuario.apellidos" name="apellidos " class="form-control" required>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="correo ">Correo</label>
+                        <input type="email" #correo="ngModel" [(ngModel)]="usuario.correo" name="correo " class="form-control" required>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="telefono ">Telefono</label>
+                        <input type="text" #telefono="ngModel" [(ngModel)]="usuario.telefono" name="telefono " class="form-control" required>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="direccion ">Dirección</label>
+                        <input type="text" #direccion="ngModel" [(ngModel)]="usuario.direccion" name="direccion " class="form-control" required>
+                    </div>
+
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="userForm.form.invalid">Enviar</button>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 my-5">
+
+
+        <div *ngIf="borrado" class="alert alert-danger alert-dismissible fade show" role="alert">
+            Usuario eliminado con exito!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Dirección</th>
+                <th>Editar</th>
+            </thead>
+            <tbody>
+
+                <tr *ngFor='let usuario of usuarios'>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.correo}}</td>
+                    <td>{{usuario.telefono}}</td>
+                    <td>{{usuario.direccion}}</td>
+                    <td>
+
+
+                        <a (click)="editUser(usuario)" style="cursor: pointer;">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a style="cursor: pointer; margin-left: 17px;" (click)="deleteUser(usuario._id)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
